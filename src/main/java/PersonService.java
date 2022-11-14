@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,4 +64,28 @@ public class PersonService {
     public List<Person> personBetween18and60(){
         return persons.stream().filter(person -> (person.age()>18) && (person.age() <60)).toList();
     }
+
+    public List<Person> personsHavingFirstNameStartingWithA(){
+        return persons.stream().filter(person -> person.firstName().charAt(0)=='A').toList();
+    }
+
+    public List<String> firstNameUnique(){
+        return persons.stream().map(Person::firstName).distinct().toList();
+    }
+
+    public List<Person> sortByFirstName(){
+        return persons.stream().sorted(Comparator.comparing(Person::firstName)).toList();
+    }
+
+    public List<Person> sortByLastName(){
+        return persons.stream().sorted(Comparator.comparing(Person::lastName)).toList();
+    }
+
+    public List<Person> multypleSort(){
+        sortByFirstName();
+        sortByLastName();
+        return persons.stream().sorted(Comparator.comparing(Person::age)).toList();
+    }
+
+
 }
